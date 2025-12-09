@@ -1,0 +1,1 @@
+/home/ani-root/disaster_robot_ws/build/disaster_robot_description/ament_cmake_core/disaster_robot_descriptionConfig-version.cmake

@@ -1,0 +1,22 @@
+[0.012s] Invoking command in '/home/ani-root/disaster_robot_ws/build/disaster_robot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble VIRTUAL_ENV_PROMPT=(rl_robot_env) /usr/bin/cmake /home/ani-root/disaster_robot_ws/src/disaster_robot_description -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/ani-root/disaster_robot_ws/install/disaster_robot_description
+[0.065s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.154s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.186s] Traceback (most recent call last):
+[0.187s]   File "/opt/ros/humble/share/ament_cmake_core/cmake/core/package_xml_2_cmake.py", line 22, in <module>
+[0.187s]     from catkin_pkg.package import parse_package_string
+[0.187s] ModuleNotFoundError: No module named 'catkin_pkg'
+[0.188s] [31mCMake Error at /opt/ros/humble/share/ament_cmake_core/cmake/core/ament_package_xml.cmake:95 (message):
+[0.188s]   execute_process(/home/ani-root/rl_robot_env/bin/python3
+[0.188s]   /opt/ros/humble/share/ament_cmake_core/cmake/core/package_xml_2_cmake.py
+[0.188s]   /home/ani-root/disaster_robot_ws/src/disaster_robot_description/package.xml
+[0.188s]   /home/ani-root/disaster_robot_ws/build/disaster_robot_description/ament_cmake_core/package.cmake)
+[0.189s]   returned error code 1
+[0.189s] Call Stack (most recent call first):
+[0.189s]   /opt/ros/humble/share/ament_cmake_core/cmake/core/ament_package_xml.cmake:49 (_ament_package_xml)
+[0.189s]   /opt/ros/humble/share/ament_cmake_core/cmake/core/ament_package.cmake:63 (ament_package_xml)
+[0.189s]   CMakeLists.txt:21 (ament_package)
+[0.189s] 
+[0.189s] [0m
+[0.189s] -- Configuring incomplete, errors occurred!
+[0.189s] See also "/home/ani-root/disaster_robot_ws/build/disaster_robot_description/CMakeFiles/CMakeOutput.log".
+[0.197s] Invoked command in '/home/ani-root/disaster_robot_ws/build/disaster_robot_description' returned '1': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble VIRTUAL_ENV_PROMPT=(rl_robot_env) /usr/bin/cmake /home/ani-root/disaster_robot_ws/src/disaster_robot_description -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/ani-root/disaster_robot_ws/install/disaster_robot_description

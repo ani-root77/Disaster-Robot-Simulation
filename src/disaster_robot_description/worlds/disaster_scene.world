@@ -1,0 +1,204 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="disaster_obstacles">
+
+    <!-- Basic environment -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <!-- world gravity -->
+    <gravity>0 0 -9.81</gravity>
+
+    <physics name="default_physics" type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+
+    <light name="main_light" type="directional">
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>1 1 1 1</diffuse>
+      <specular>0.5 0.5 0.5 1</specular>
+      <direction>-0.5 0.2 -1</direction>
+      <cast_shadows>true</cast_shadows>
+    </light>
+
+    <!-- ========= EXIT ZONE (goal) ========= -->
+    <model name="exit_zone">
+      <static>true</static>
+      <link name="exit_link">
+        <visual name="exit_vis">
+          <geometry><box><size>0.8 0.8 0.01</size></box></geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Green</name>
+            </script>
+            <ambient>0 1 0 0.8</ambient>
+            <diffuse>0 1 0 0.8</diffuse>
+          </material>
+        </visual>
+        <collision name="exit_col">
+          <geometry><box><size>0.8 0.8 0.01</size></box></geometry>
+        </collision>
+      </link>
+      <pose>6.0 0 0.005 0 0 0</pose>
+    </model>
+
+    <!-- ========= STATIC OBSTACLES (walls with a central gap) ========= -->
+    <!-- Top wall: left segment -->
+    <model name="wall_top_left">
+      <static>true</static>
+      <link name="wtl_link">
+        <visual name="wtl_vis"><geometry><box><size>2.2 0.2 1.0</size></box></geometry></visual>
+        <collision name="wtl_col"><geometry><box><size>2.2 0.2 1.0</size></box></geometry></collision>
+      </link>
+      <!-- left part centered at x=1.1, y=1.5 -->
+      <pose>1.1 1.5 0.5 0 0 0</pose>
+    </model>
+
+    <!-- Top wall: right segment -->
+    <model name="wall_top_right">
+      <static>true</static>
+      <link name="wtr_link">
+        <visual name="wtr_vis"><geometry><box><size>2.2 0.2 1.0</size></box></geometry></visual>
+        <collision name="wtr_col"><geometry><box><size>2.2 0.2 1.0</size></box></geometry></collision>
+      </link>
+      <!-- right part centered at x=4.9, y=1.5 -->
+      <pose>4.9 1.5 0.5 0 0 0</pose>
+    </model>
+
+    <!-- Bottom wall: left segment -->
+    <model name="wall_bottom_left">
+      <static>true</static>
+      <link name="wbl_link">
+        <visual name="wbl_vis"><geometry><box><size>2.2 0.2 1.0</size></box></geometry></visual>
+        <collision name="wbl_col"><geometry><box><size>2.2 0.2 1.0</size></box></geometry></collision>
+      </link>
+      <!-- left part centered at x=1.1, y=-1.5 -->
+      <pose>1.1 -1.5 0.5 0 0 0</pose>
+    </model>
+
+    <!-- Bottom wall: right segment -->
+    <model name="wall_bottom_right">
+      <static>true</static>
+      <link name="wbr_link">
+        <visual name="wbr_vis"><geometry><box><size>2.2 0.2 1.0</size></box></geometry></visual>
+        <collision name="wbr_col"><geometry><box><size>2.2 0.2 1.0</size></box></geometry></collision>
+      </link>
+      <!-- right part centered at x=4.9, y=-1.5 -->
+      <pose>4.9 -1.5 0.5 0 0 0</pose>
+    </model>
+
+    <!-- inner divider: moved slightly so it doesn't block the central gap -->
+    <model name="divider">
+      <static>true</static>
+      <link name="div">
+        <visual name="div_vis"><geometry><box><size>0.2 1.2 0.9</size></box></geometry></visual>
+        <collision name="div_col"><geometry><box><size>0.2 1.2 0.9</size></box></geometry></collision>
+      </link>
+      <!-- smaller / shifted divider centered at x=2.2 so it flanks the corridor -->
+      <pose>2.2 -0.25 0.45 0 0 0</pose>
+    </model>
+
+    <!-- some fixed rubble (static) -->
+    <model name="rubble_static_1">
+      <static>true</static>
+      <link name="rs1">
+        <visual name="rs1_vis"><geometry><box><size>0.6 0.6 0.3</size></box></geometry></visual>
+        <collision name="rs1_col"><geometry><box><size>0.6 0.6 0.3</size></box></geometry></collision>
+      </link>
+      <pose>1.0 -0.8 0.15 0 0 0</pose>
+    </model>
+
+    <!-- ========= DYNAMIC DEBRIS (pushable boxes) ========= -->
+    <model name="debris_box_2">
+      <static>true</static>
+      <link name="db2">
+        <inertial>
+          <mass>1.2</mass>
+          <inertia>
+            <ixx>0.01</ixx><ixy>0.0</ixy><ixz>0.0</ixz>
+            <iyy>0.01</iyy><iyz>0.0</iyz><izz>0.01</izz>
+          </inertia>
+        </inertial>
+        <collision name="db2_col">
+          <geometry><box><size>0.35 0.35 0.35</size></box></geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu><mu2>0.9</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="db2_vis"><geometry><box><size>0.35 0.35 0.35</size></box></geometry></visual>
+      </link>
+      <pose>3.2 -0.5 0.175 0 0 0</pose>
+    </model>
+
+    <model name="debris_tilted">
+      <static>true</static>
+      <link name="dt">
+        <inertial>
+          <mass>1.0</mass>
+          <inertia>
+            <ixx>0.01</ixx><ixy>0.0</ixy><ixz>0.0</ixz>
+            <iyy>0.01</iyy><iyz>0.0</iyz><izz>0.01</izz>
+          </inertia>
+        </inertial>
+        <collision name="dt_col">
+          <geometry><box><size>0.6 0.2 0.05</size></box></geometry>
+        </collision>
+        <visual name="dt_vis"><geometry><box><size>0.6 0.2 0.05</size></box></geometry></visual>
+      </link>
+      <pose>4.1 0.6 0.025 0 0 0.6</pose>
+    </model>
+
+    <!-- ========= ROBOT SPAWN / RANDOMIZATION HINTS ========= -->
+    <model name="spawn_point_1">
+      <static>true</static>
+      <link name="sp1">
+        <visual name="sp1_vis">
+          <geometry><sphere><radius>0.02</radius></sphere></geometry>
+          <material><ambient>0 0 1 1</ambient></material>
+        </visual>
+      </link>
+      <pose>-2.0 0.6 0 0 0 0</pose>
+    </model>
+
+    <model name="spawn_point_2">
+      <static>true</static>
+      <link name="sp2">
+        <visual name="sp2_vis">
+          <geometry><sphere><radius>0.02</radius></sphere></geometry>
+          <material><ambient>0 0 1 1</ambient></material>
+        </visual>
+      </link>
+      <pose>-2.0 -0.6 0 0 0 0</pose>
+    </model>
+
+    <!-- ========= OPTIONAL: contact sensor zone to count collisions ========= -->
+    <model name="collision_zone">
+      <static>true</static>
+      <link name="cz">
+        <collision name="cz_col"><geometry><box><size>0.6 0.6 0.1</size></box></geometry></collision>
+        <visual name="cz_vis"><geometry><box><size>0.6 0.6 0.1</size></box></geometry><material><ambient>0.6 0 0 0.4</ambient></material></visual>
+      </link>
+      <pose>2.2 0 0.05 0 0 0</pose>
+    </model>
+
+    <gui fullscreen='0'>
+      <camera name='camera'>
+        <!-- initial camera behind the spawn (robot at 0,0,0) -->
+        <pose>-3 0 1.5 0 0.3 0</pose>
+        <view_controller>orbit</view_controller>
+      </camera>
+    </gui>
+
+  </world>
+</sdf>

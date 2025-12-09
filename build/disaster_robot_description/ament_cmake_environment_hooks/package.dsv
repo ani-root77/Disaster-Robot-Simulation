@@ -1,0 +1,4 @@
+source;share/disaster_robot_description/local_setup.bash
+source;share/disaster_robot_description/local_setup.dsv
+source;share/disaster_robot_description/local_setup.sh
+source;share/disaster_robot_description/local_setup.zsh
