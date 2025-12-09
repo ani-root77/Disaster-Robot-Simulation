@@ -180,7 +180,7 @@ Ideas for next steps:
 
 ## 9. License
 
-Add your preferred license here (e.g. MIT, BSD, Apache-2.0).
+MIT, BSD, Apache-2.0
 
 ---
 
